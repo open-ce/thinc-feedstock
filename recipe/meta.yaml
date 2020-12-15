@@ -1,7 +1,7 @@
 # adapted from the conda-forge thinc recipe
 {% set name = "thinc" %}
-{% set version = "7.1.1" %}
-{% set sha256sum = "68478efee64a5523d881d47914a92e315bb31bf0a404cec1ff7be83b0a267f3e" %}
+{% set version = "7.4.1" %}
+{% set sha256sum = "0139fa84dc9b8d88af15e648fc4ae13d899b8b5e49cb26a8f4a0604ee9ad8a9e" %}
 package:
   name: {{ name }}
   version: {{ version }}
@@ -17,12 +17,12 @@ build:
 
 requirements:
   build:
-    - pip {{ pip }}
     - {{ compiler('cxx') }}
   host:
     - pip {{ pip }}
     - numpy {{ numpy }} 
     - python {{ python }}
+    - cython {{ cython }}
     - setuptools {{ setuptools }}
     - wheel {{ wheel }} 
 
@@ -37,6 +37,7 @@ requirements:
     - wasabi {{ wasabi }}
     - plac {{ plac }}
     - tqdm {{ tqdm }}
+    - catalogue {{ catalogue }}
 
 test:
   requires:
