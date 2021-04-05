@@ -1,7 +1,7 @@
 # adapted from the conda-forge thinc recipe
 {% set name = "thinc" %}
-{% set version = "7.4.1" %}
-{% set sha256sum = "0139fa84dc9b8d88af15e648fc4ae13d899b8b5e49cb26a8f4a0604ee9ad8a9e" %}
+{% set version = "8.0.2" %}
+{% set sha256sum = "20f033b3d9fbd02389d8f828cebcd3a42aee3e17ed4c2d56c6d5163af83a9cee" %}
 package:
   name: {{ name }}
   version: {{ version }}
@@ -10,9 +10,11 @@ source:
   fn: {{ name }}-{{ version }}.tar.gz
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: {{ sha256sum }}
+  patches: 
+    - 0100-importorskip-tests.patch
 
 build:
-  number: 2
+  number: 1 
   script: "{{ PYTHON }} -m pip install . --no-deps --ignore-installed --no-cache-dir -vvv"
 
 requirements:
@@ -25,6 +27,10 @@ requirements:
     - cython {{ cython }}
     - setuptools {{ setuptools }}
     - wheel {{ wheel }} 
+    - murmurhash {{ murmurhash }}
+    - cymem {{ cymem }}
+    - preshed {{ preshed }}
+    - cython-blis {{ cython_blis }}
 
   run:
     - python {{ python }}
@@ -35,15 +41,19 @@ requirements:
     - cython-blis {{ cython_blis }}
     - srsly {{ srsly }}
     - wasabi {{ wasabi }}
-    - plac {{ plac }}
     - tqdm {{ tqdm }}
     - catalogue {{ catalogue }}
+    - pydantic
+    - dataclasses                                   # [py36]    
+    - typing_extensions {{ typing_extensions }}     # [py36 or py37]
+    - contextvars  # [py36]
 
 test:
   requires:
     - hypothesis <=5.0.0
     - pytest
     - mock
+    - pathy
 
   imports:
     - thinc
@@ -53,7 +63,8 @@ test:
     - thinc.neural
 
   commands:
-    - python -m pytest --tb=native --pyargs {{ name }}
+#    - python -m pytest --tb=native --pyargs {{ name }} -k "not test_config_roundtrip_disk_respects_path_subclasses and not test_shim_can_roundtrip_with_path_subclass and not test_model_can_roundtrip_with_path_subclass"
+     - python -m pytest --tb=native --pyargs {{ name }}
 
 about:
   home: https://github.com/explosion/thinc/
