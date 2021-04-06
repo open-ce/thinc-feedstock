@@ -63,7 +63,7 @@ test:
     - thinc.neural
 
   commands:
-     - python -m pytest --tb=native --pyargs {{ name }}
+    - python -m pytest --tb=native --pyargs {{ name }}
 
 about:
   home: https://github.com/explosion/thinc/
