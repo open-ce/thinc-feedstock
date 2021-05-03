@@ -1,7 +1,7 @@
 # adapted from the conda-forge thinc recipe
 {% set name = "thinc" %}
-{% set version = "8.0.2" %}
-{% set sha256sum = "20f033b3d9fbd02389d8f828cebcd3a42aee3e17ed4c2d56c6d5163af83a9cee" %}
+{% set version = "8.0.3" %}
+{% set sha256sum = "c370a7a46d01b588d8d5f99d8d5e36b3cbac4512638356fa430f7f52bb3a8897" %}
 package:
   name: {{ name }}
   version: {{ version }}
@@ -44,13 +44,14 @@ requirements:
     - tqdm {{ tqdm }}
     - catalogue {{ catalogue }}
     - pydantic
-    - dataclasses                                   # [py36]    
-    - typing_extensions {{ typing_extensions }}     # [py<38] 
-    - contextvars  # [py36]
+    - dataclasses                                   # [py36]
+    - typing_extensions {{ typing_extensions }}     # [py<38]
+    - contextvars                                   # [py36]
 
 test:
   requires:
-    - hypothesis <=5.0.0
+    - hypothesis
+    - importlib_metadata ==2.0.0
     - pytest
     - mock
     - pathy
