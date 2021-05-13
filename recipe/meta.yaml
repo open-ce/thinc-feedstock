@@ -41,10 +41,9 @@ requirements:
     - cython-blis {{ cython_blis }}
     - srsly {{ srsly }}
     - wasabi {{ wasabi }}
-    - tqdm {{ tqdm }}
     - catalogue {{ catalogue }}
-    - pydantic
-    - dataclasses                                   # [py36]
+    - pydantic {{ pydantic }}
+    - dataclasses  {{ dataclasses }}                # [py36]
     - typing_extensions {{ typing_extensions }}     # [py<38]
     - contextvars                                   # [py36]
 
