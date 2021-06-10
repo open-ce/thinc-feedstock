@@ -28,6 +28,9 @@ requirements:
     - cython {{ cython }}
     - setuptools {{ setuptools }}
     - wheel {{ wheel }} 
+    # Use pins to control cos6/cos7 match
+    - libgcc-ng  {{ libgcc }}
+    - libstdcxx-ng  {{ libstdcxx }}
 
   run:
     - python {{ python }}
@@ -47,7 +50,9 @@ test:
     - hypothesis <=5.0.0
     - pytest
     - mock
-
+    # Use pins to control cos6/cos7 match
+    - libgcc-ng  {{ libgcc }}
+    - libstdcxx-ng  {{ libstdcxx }}
   imports:
     - thinc
     - thinc.api
