@@ -19,6 +19,7 @@ requirements:
   build:
     - {{ compiler('cxx') }}
     # Use pins to control cos6/cos7 match
+    - libgcc-ng  {{ libgcc }}
     - libstdcxx-ng  {{ libstdcxx }}
   host:
     - pip {{ pip }}
