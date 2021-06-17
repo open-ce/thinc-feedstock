@@ -16,10 +16,16 @@ source:
 build:
   number: 1
   script: "{{ PYTHON }} -m pip install . --no-deps --ignore-installed --no-cache-dir -vvv"
+  ignore_run_exports:
+    - libgcc-ng
+    - libstdcxx-ng
 
 requirements:
   build:
     - {{ compiler('cxx') }}
+    # Use pins to control cos6/cos7 match
+    - libgcc-ng  {{ libgcc }}
+    - libstdcxx-ng  {{ libstdcxx }}
   host:
     - pip {{ pip }}
     - numpy {{ numpy }} 
@@ -31,6 +37,9 @@ requirements:
     - cymem {{ cymem }}
     - preshed {{ preshed }}
     - cython-blis {{ cython_blis }}
+    # Use pins to control cos6/cos7 match
+    - libgcc-ng  {{ libgcc }}
+    - libstdcxx-ng  {{ libstdcxx }}
 
   run:
     - python {{ python }}
@@ -47,6 +56,9 @@ requirements:
     - typing_extensions {{ typing_extensions }}     # [py<38]
     - contextvars                                   # [py36]
 
+    # Use pins to control cos6/cos7 match
+    - libgcc-ng  {{ libgcc }}
+    - libstdcxx-ng  {{ libstdcxx }}
 test:
   requires:
     - hypothesis
