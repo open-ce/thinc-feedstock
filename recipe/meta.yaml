@@ -1,7 +1,7 @@
 # adapted from the conda-forge thinc recipe
 {% set name = "thinc" %}
-{% set version = "7.4.1" %}
-{% set sha256sum = "0139fa84dc9b8d88af15e648fc4ae13d899b8b5e49cb26a8f4a0604ee9ad8a9e" %}
+{% set version = "8.0.3" %}
+{% set sha256sum = "c370a7a46d01b588d8d5f99d8d5e36b3cbac4512638356fa430f7f52bb3a8897" %}
 package:
   name: {{ name }}
   version: {{ version }}
@@ -10,9 +10,11 @@ source:
   fn: {{ name }}-{{ version }}.tar.gz
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: {{ sha256sum }}
+  patches: 
+    - 0100-importorskip-tests.patch
 
 build:
-  number: 3
+  number: 1
   script: "{{ PYTHON }} -m pip install . --no-deps --ignore-installed --no-cache-dir -vvv"
   ignore_run_exports:
     - libgcc-ng
@@ -31,6 +33,10 @@ requirements:
     - cython {{ cython }}
     - setuptools {{ setuptools }}
     - wheel {{ wheel }} 
+    - murmurhash {{ murmurhash }}
+    - cymem {{ cymem }}
+    - preshed {{ preshed }}
+    - cython-blis {{ cython_blis }}
     # Use pins to control cos6/cos7 match
     - libgcc-ng  {{ libgcc }}
     - libstdcxx-ng  {{ libstdcxx }}
@@ -44,17 +50,23 @@ requirements:
     - cython-blis {{ cython_blis }}
     - srsly {{ srsly }}
     - wasabi {{ wasabi }}
-    - plac {{ plac }}
-    - tqdm {{ tqdm }}
     - catalogue {{ catalogue }}
+    - pydantic {{ pydantic }}
+    - dataclasses  {{ dataclasses }}                # [py36]
+    - typing_extensions {{ typing_extensions }}     # [py<38]
+    - contextvars                                   # [py36]
+
     # Use pins to control cos6/cos7 match
     - libgcc-ng  {{ libgcc }}
     - libstdcxx-ng  {{ libstdcxx }}
 test:
   requires:
-    - hypothesis <=5.0.0
+    - hypothesis
+    - importlib_metadata ==2.0.0
     - pytest
     - mock
+    - pathy
+
   imports:
     - thinc
     - thinc.api
