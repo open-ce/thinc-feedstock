@@ -60,7 +60,6 @@ requirements:
 test:
   requires:
     - hypothesis
-    - importlib_metadata ==2.0.0
     - pytest
     - mock
     - pathy
