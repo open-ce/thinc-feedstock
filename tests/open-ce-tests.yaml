@@ -1,7 +1,7 @@
 tests:
   - name: Setup thinc Tests
     command: |
-        conda install -y pytest>=4.6.5 pytest-timeout mock hypothesis
+        conda install -y pytest>=4.6.5 pytest-timeout mock hypothesis typed-ast numpy srsly pyzmq
         pip install mypy nbformat ml_datasets nbconvert 
   - name: Run thinc tests
     command: |
