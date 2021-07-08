@@ -1,8 +1,9 @@
 tests:
   - name: Setup thinc Tests
     command: |
-        conda install -y pytest>=4.6.5 pytest-timeout mock hypothesis
+        conda install -y pytest>=4.6.5 pytest-timeout mock hypothesis typed-ast numpy srsly pyzmq
+        pip install mypy nbformat ml_datasets nbconvert 
   - name: Run thinc tests
     command: |
         THINC_LOCATION=$(python -c "import os; import thinc; print(os.path.dirname(thinc.__file__))")
-        python -m pytest -k "not test_batch_norm and not test_affine and not test_ops" $THINC_LOCATION
+        python -m pytest -k "not test_batch_norm and not test_affine and not test_ops and not test_mypy_results" $THINC_LOCATION
