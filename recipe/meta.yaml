@@ -62,7 +62,6 @@ test:
     - typed-ast
     - pyzmq
 
-
   imports:
     - thinc
     - thinc.api
