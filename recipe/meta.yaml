@@ -12,7 +12,7 @@ source:
   sha256: {{ sha256sum }}
 
 build:
-  number: 2
+  number: 3
   script: "{{ PYTHON }} -m pip install . --no-deps --ignore-installed --no-cache-dir -vvv"
   ignore_run_exports:
     - libgcc-ng
@@ -63,6 +63,11 @@ test:
     - pytest
     - mock
     - pathy
+    - numpy
+    - srsly
+    - typed-ast
+    - pyzmq
+
 
   imports:
     - thinc
@@ -70,7 +75,6 @@ test:
     - thinc.extra
 
   commands:
-    - conda install typed-ast numpy srsly pyzmq
     - pip install mypy nbformat ml_datasets nbconvert
     - python -m pytest --tb=native --pyargs {{ name }} -k 'not test_mypy_results'
 
