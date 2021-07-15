@@ -12,11 +12,8 @@ source:
   sha256: {{ sha256sum }}
 
 build:
-  number: 3
+  number: 4
   script: "{{ PYTHON }} -m pip install . --no-deps --ignore-installed --no-cache-dir -vvv"
-  ignore_run_exports:
-    - libgcc-ng
-    - libstdcxx-ng
 
 requirements:
   build:
@@ -47,9 +44,6 @@ requirements:
     - plac {{ plac }}
     - tqdm {{ tqdm }}
     - catalogue {{ catalogue }}
-    # Use pins to control cos6/cos7 match
-    - libgcc-ng  {{ libgcc }}
-    - libstdcxx-ng  {{ libstdcxx }}
 test:
   requires:
     - hypothesis <=5.0.0
