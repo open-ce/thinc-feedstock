@@ -1,7 +1,7 @@
 # adapted from the conda-forge thinc recipe
 {% set name = "thinc" %}
-{% set version = "8.0.3" %}
-{% set sha256sum = "c370a7a46d01b588d8d5f99d8d5e36b3cbac4512638356fa430f7f52bb3a8897" %}
+{% set version = "8.0.8" %}
+{% set sha256sum = "cf2abbd99c56f21b8804f31f995460515d95a5c5988be39e0964469e0070987b" %}
 package:
   name: {{ name }}
   version: {{ version }}
@@ -12,15 +12,12 @@ source:
   sha256: {{ sha256sum }}
 
 build:
-  number: 4
+  number: 1
   script: "{{ PYTHON }} -m pip install . --no-deps --ignore-installed --no-cache-dir -vvv"
 
 requirements:
   build:
     - {{ compiler('cxx') }}
-    # Use pins to control cos6/cos7 match
-    - libgcc-ng  {{ libgcc }}
-    - libstdcxx-ng  {{ libstdcxx }}
   host:
     - pip {{ pip }}
     - numpy {{ numpy }} 
@@ -32,9 +29,6 @@ requirements:
     - cymem {{ cymem }}
     - preshed {{ preshed }}
     - cython-blis {{ cython_blis }}
-    # Use pins to control cos6/cos7 match
-    - libgcc-ng  {{ libgcc }}
-    - libstdcxx-ng  {{ libstdcxx }}
 
   run:
     - python {{ python }}
