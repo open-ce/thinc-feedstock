@@ -6,4 +6,4 @@ tests:
   - name: Run thinc tests
     command: |
         THINC_LOCATION=$(python -c "import os; import thinc; print(os.path.dirname(thinc.__file__))")
-        python -m pytest -k "not test_batch_norm and not test_affine and not test_ops and not test_mypy_results" $THINC_LOCATION
+        python -m pytest -k "not test_mypy_results" $THINC_LOCATION
